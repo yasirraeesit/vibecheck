@@ -73,7 +73,7 @@ $$\text{Deception Score} = 0.45 \cdot \min\left(1.0, \frac{\Delta \text{BPM}}{25
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/YasirRaees/vibecheck-polygraph.git
+git clone https://github.com/yasirraeesit/vibecheck.git
 cd vibecheck-polygraph
 npm install
 ```

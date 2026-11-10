@@ -25,7 +25,7 @@ When the answer is locked in, suspenseful sirens ring out, the phone buzzes with
 
 ## Demo & Repository
 
-- **Public GitHub Repository:** [github.com/YasirRaees/vibecheck-polygraph](https://github.com/YasirRaees/vibecheck-polygraph)
+- **Public GitHub Repository:** [github.com/yasirraeesit/vibecheck](https://github.com/yasirraeesit/vibecheck)
 - **Demo Video (YouTube / Loom):** [Link to 60-second gameplay video demo]
 - **Downloadable APK:** Available under GitHub Releases for Android testing.
 
