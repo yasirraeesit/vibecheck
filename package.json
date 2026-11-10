@@ -38,7 +38,8 @@
     "moduleNameMapper": {
       "^react-native$": "<rootDir>/__mocks__/react-native.ts",
       "^expo-haptics$": "<rootDir>/__mocks__/expo-haptics.ts",
-      "^expo-av$": "<rootDir>/__mocks__/expo-av.ts"
+      "^expo-av$": "<rootDir>/__mocks__/expo-av.ts",
+      "^react-native-svg$": "<rootDir>/__mocks__/react-native-svg.ts"
     },
     "moduleFileExtensions": [
       "ts",
