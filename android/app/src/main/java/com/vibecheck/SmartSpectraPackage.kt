@@ -16,3 +16,4 @@ class SmartSpectraPackage : ReactPackage {
         return emptyList()
     }
 }
+

@@ -63,3 +63,4 @@ class SmartSpectraModule(private val reactContext: ReactApplicationContext) :
             .emit("onVitalsUpdate", payload)
     }
 }
+
