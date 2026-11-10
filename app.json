@@ -35,7 +35,8 @@
           "cameraPermission": "Allow VibeCheck to scan suspect vital signs using the camera."
         }
       ],
-      "./plugins/withSmartSpectra.js"
+      "./plugins/withSmartSpectra.js",
+      "expo-asset"
     ],
     "extra": {
       "eas": {
@@ -44,4 +45,3 @@
     }
   }
 }
-
