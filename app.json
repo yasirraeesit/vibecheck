@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "VibeCheck",
-    "slug": "vibecheck-polygraph",
+    "slug": "vibecheck",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -36,7 +36,12 @@
         }
       ],
       "./plugins/withSmartSpectra.js"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "568f4963-a41e-483b-b5cc-0052cf8ce65f"
+      }
+    }
   }
 }
 
