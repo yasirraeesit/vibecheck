@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "VibeCheck",
+    "slug": "vibecheck-polygraph",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B0F19"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSCameraUsageDescription": "VibeCheck uses your camera for contactless heart rate, respiration, and micro-expression detection during party polygraph interrogation."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#0B0F19"
+      },
+      "package": "com.vibecheck.polygraph",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.VIBRATE"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow VibeCheck to scan suspect vital signs using the camera."
+        }
+      ],
+      "./plugins/withSmartSpectra.js"
+    ]
+  }
+}
