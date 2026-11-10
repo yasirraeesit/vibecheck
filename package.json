@@ -33,7 +33,8 @@
     "preset": "ts-jest",
     "testEnvironment": "node",
     "testMatch": [
-      "**/__tests__/**/*.test.ts"
+      "**/__tests__/**/*.test.[jt]s?(x)",
+      "**/*.test.[jt]s?(x)"
     ],
     "moduleNameMapper": {
       "^react-native$": "<rootDir>/__mocks__/react-native.ts",
@@ -41,7 +42,8 @@
       "^expo-av$": "<rootDir>/__mocks__/expo-av.ts",
       "^react-native-svg$": "<rootDir>/__mocks__/react-native-svg.ts",
       "^react-native-view-shot$": "<rootDir>/__mocks__/react-native-view-shot.ts",
-      "^expo-sharing$": "<rootDir>/__mocks__/expo-sharing.ts"
+      "^expo-sharing$": "<rootDir>/__mocks__/expo-sharing.ts",
+      "^expo-status-bar$": "<rootDir>/__mocks__/expo-status-bar.ts"
     },
     "moduleFileExtensions": [
       "ts",

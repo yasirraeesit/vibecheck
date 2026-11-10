@@ -2,3 +2,4 @@ export const captureRef = jest.fn().mockResolvedValue('file:///mock/path/mugshot
 export default {
   captureRef,
 };
+
