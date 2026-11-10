@@ -139,7 +139,11 @@ export const CameraHudOverlay: React.FC<CameraHudOverlayProps> = ({
 
 const styles = StyleSheet.create({
   overlayContainer: {
-    ...StyleSheet.absoluteFillObject,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     justifyContent: 'space-between',
     padding: 16,
   },

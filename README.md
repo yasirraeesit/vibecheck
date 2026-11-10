@@ -3,7 +3,7 @@
 > Built for the **Presage SmartSpectra SDK Challenge** on DEV Community.  
 > Entry category: *Most Creative or Delightful Use*.
 
-[![React Native](https://img.shields.io/badge/React%20Native-Expo%20SDK%2052-blue.svg)](https://reactnative.dev)
+[![React Native](https://img.shields.io/badge/React%20Native-Expo%20SDK%2058-blue.svg)](https://reactnative.dev)
 [![SmartSpectra](https://img.shields.io/badge/Presage-SmartSpectra%20SDK%20v1.0.25-cyan.svg)](https://smartspectra.presagetech.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -31,7 +31,7 @@ Instead of needing a smartwatch or finger clip, it uses your phone's camera and 
 
 ## Tech Stack & Architecture
 
-- **Frontend:** React Native with Expo SDK 52
+- **Frontend:** React Native with Expo SDK 58
 - **Sensors:** Presage SmartSpectra Android SDK (`com.presagetech:smartspectra:1.0.25`)
 - **Native Bridge:** Custom Kotlin module (`SmartSpectraModule.kt`) and Expo config plugin (`plugins/withSmartSpectra.js`)
 - **HUD & Graphics:** Procedural 60 FPS SVG cardiac wave (`react-native-svg`)

@@ -6,11 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#0B0F19"
-    },
     "ios": {
       "supportsTablet": false,
       "infoPlist": {
@@ -36,7 +31,9 @@
         }
       ],
       "./plugins/withSmartSpectra.js",
-      "expo-asset"
+      "expo-asset",
+      "expo-sharing",
+      "expo-status-bar"
     ],
     "extra": {
       "eas": {

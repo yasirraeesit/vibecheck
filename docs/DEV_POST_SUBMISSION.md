@@ -35,7 +35,7 @@ That's how **VibeCheck** was born. It turns your phone into a retro sci-fi lie d
 
 ## How It Works Under the Hood
 
-VibeCheck is built with **React Native (Expo SDK 52)** and connects to Presage's native Android SDK (`com.presagetech:smartspectra:1.0.25`).
+VibeCheck is built with **React Native (Expo SDK 58)** and connects to Presage's native Android SDK (`com.presagetech:smartspectra:1.0.25`).
 
 ### 1. Camera & Native Android Bridge
 Presage's SDK analyzes video frames directly to pick up optical changes in skin blood flow (photoplethysmography). To use this inside React Native, I wrote a Kotlin module (`SmartSpectraModule.kt`) and an Expo config plugin (`plugins/withSmartSpectra.js`). 

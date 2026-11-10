@@ -35,7 +35,7 @@ interface LieCertificateCardProps {
 }
 
 export const LieCertificateCard: React.FC<LieCertificateCardProps> = ({ input, onShared }) => {
-  const cardRef = useRef<View>(null);
+  const cardRef = useRef<any>(null);
   const data = formatVerdictCertificateData(input);
 
   const handleShare = async () => {
