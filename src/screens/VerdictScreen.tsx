@@ -47,20 +47,20 @@ export const VerdictScreen: React.FC<VerdictScreenProps> = ({
     <View style={styles.container}>
       {!revealed ? (
         <View style={styles.countdownContainer}>
-          <Text style={styles.evaluatingText}>ANALYZING AUTONOMIC SIGNALS...</Text>
+          <Text style={styles.evaluatingText}>READING THE VITALS...</Text>
           <Text style={styles.countdownDigit}>{countdown}</Text>
-          <Text style={styles.calculatingSub}>Cross-referencing cardiac surge with facial micro-strain</Text>
+          <Text style={styles.calculatingSub}>Checking heart rate changes and breathing pauses...</Text>
         </View>
       ) : (
         <View style={styles.resultContainer}>
           <View style={[styles.verdictBadge, { borderColor: verdictColor }]}>
             <Text style={[styles.verdictTitle, { color: verdictColor }]}>
-              {verdict.isDeceptive ? 'DECEPTION DETECTED' : 'COLD-BLOODED TRUTH'}
+              {verdict.isDeceptive ? 'CAUGHT IN A LIE!' : 'CLEAN TRUTH!'}
             </Text>
           </View>
 
           <Text style={styles.confidenceText}>
-            CONFIDENCE SCORE: {verdict.confidencePercentage}%
+            CERTAINTY: {verdict.confidencePercentage}%
           </Text>
 
           <View style={styles.detailCard}>
@@ -70,27 +70,27 @@ export const VerdictScreen: React.FC<VerdictScreenProps> = ({
             
             <View style={styles.statsRow}>
               <View style={styles.statBox}>
-                <Text style={styles.statLabel}>CARDIAC SURGE</Text>
+                <Text style={styles.statLabel}>HEART RATE CHANGE</Text>
                 <Text style={[styles.statValue, { color: verdictColor }]}>
                   {verdict.bpmDelta >= 0 ? `+${verdict.bpmDelta}` : verdict.bpmDelta} BPM
                 </Text>
               </View>
 
               <View style={styles.statBox}>
-                <Text style={styles.statLabel}>RESPIRATION</Text>
+                <Text style={styles.statLabel}>BREATHING</Text>
                 <Text style={styles.statValue}>
-                  {verdict.breathHoldDetected ? 'HELD' : 'NORMAL'}
+                  {verdict.breathHoldDetected ? 'HELD BREATH' : 'STEADY'}
                 </Text>
               </View>
             </View>
           </View>
 
           <TouchableOpacity style={[styles.shareBtn, { backgroundColor: verdictColor }]} onPress={onShareCard}>
-            <Text style={styles.shareBtnText}>EXPORT LIE CERTIFICATE CARD</Text>
+            <Text style={styles.shareBtnText}>SHARE THIS RESULT</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.nextBtn} onPress={onNextSuspect}>
-            <Text style={styles.nextBtnText}>INTERROGATE NEXT SUSPECT</Text>
+            <Text style={styles.nextBtnText}>TEST NEXT FRIEND</Text>
           </TouchableOpacity>
         </View>
       )}

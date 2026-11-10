@@ -42,38 +42,37 @@ export const ConsentScreen: React.FC<ConsentScreenProps> = ({
       </View>
 
       <View style={styles.titleContainer}>
-        <Text style={styles.titlePrefix}>THE CONTACTLESS PARTY POLYGRAPH</Text>
+        <Text style={styles.titlePrefix}>THE PARTY LIE DETECTOR</Text>
         <Text style={styles.titleMain}>VIBECHECK</Text>
         <Text style={styles.titleTagline}>
-          Putting friendships to the biometric test with real-time optical sensing.
+          Point your phone at a friend, ask spicy questions, and let their heartbeat tell the truth.
         </Text>
       </View>
 
       <View style={styles.consentCard}>
-        <Text style={styles.consentHeader}>PRIVACY & CAMERA CONSENT</Text>
+        <Text style={styles.consentHeader}>HOW THIS WORKS & YOUR PRIVACY</Text>
         <Text style={styles.consentBody}>
-          VibeCheck uses your device's camera via the Presage SmartSpectra SDK to measure real-time
-          pulse, respiration rate, and micro-expressions.
+          VibeCheck uses your phone's camera and Presage SmartSpectra to detect subtle changes in heart rate, breathing, and expressions in real time.
         </Text>
         <Text style={styles.consentBullet}>
-          • 100% on-device optical analysis
+          • 100% on-device — no video or images are ever uploaded or saved online
         </Text>
         <Text style={styles.consentBullet}>
-          • Zero cloud biometric storage or video uploading
+          • Zero accounts or logins needed — completely private
         </Text>
         <Text style={styles.consentBullet}>
-          • For entertainment and party game purposes only
+          • Just for fun with friends — not a medical or forensic test
         </Text>
       </View>
 
       <View style={styles.simulatorRow}>
-        <Text style={styles.simLabel}>DEV BIOMETRIC SIMULATOR:</Text>
+        <Text style={styles.simLabel}>DEV SIMULATOR MODE:</Text>
         <TouchableOpacity
           style={[styles.simButton, simulatorMode ? styles.simActive : styles.simInactive]}
           onPress={() => onToggleSimulator(!simulatorMode)}
         >
           <Text style={styles.simButtonText}>
-            {simulatorMode ? 'ON (DEV MODE)' : 'OFF (LIVE CAMERA)'}
+            {simulatorMode ? 'ON (SIMULATING)' : 'OFF (USING CAMERA)'}
           </Text>
         </TouchableOpacity>
       </View>
@@ -81,15 +80,15 @@ export const ConsentScreen: React.FC<ConsentScreenProps> = ({
       {isPermissionDenied ? (
         <View style={styles.deniedBox}>
           <Text style={styles.deniedText}>
-            Camera permission is required for live contactless sensing.
+            We need camera access so the app can see your face and read your pulse.
           </Text>
           <TouchableOpacity style={styles.settingsBtn} onPress={() => Linking.openSettings()}>
-            <Text style={styles.settingsBtnText}>OPEN DEVICE SETTINGS</Text>
+            <Text style={styles.settingsBtnText}>OPEN SETTINGS</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <TouchableOpacity style={styles.actionButton} onPress={handleProceed}>
-          <Text style={styles.actionButtonText}>ACCEPT & ENTER INTERROGATION</Text>
+          <Text style={styles.actionButtonText}>LET'S PLAY</Text>
         </TouchableOpacity>
       )}
     </View>

@@ -109,12 +109,12 @@ export const LieCertificateCard: React.FC<LieCertificateCardProps> = ({ input, o
         </View>
 
         <Text style={styles.cardFooter}>
-          OFFICIAL PARTY INTERROGATION CERTIFICATE • POWERED BY SMARTSPECTRA
+          OFFICIAL VIBECHECK REPORT • POWERED BY PRESAGE SMARTSPECTRA
         </Text>
       </View>
 
       <TouchableOpacity style={styles.shareButton} onPress={handleShare}>
-        <Text style={styles.shareButtonText}>SHARE TO SOCIAL / SAVE PHOTO</Text>
+        <Text style={styles.shareButtonText}>SHARE OR SAVE REPORT</Text>
       </TouchableOpacity>
     </View>
   );

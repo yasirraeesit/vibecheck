@@ -14,24 +14,24 @@ export function getHudTelemetryStatus(telemetry: BiometricTelemetry) {
   if (telemetry.status === 'lost' || telemetry.pulseBpm === 0) {
     return {
       threatColor: '#8E9AA8',
-      statusLabel: 'UNSTABLE / FACE LOST',
+      statusLabel: 'FACE NOT DETECTED',
     };
   }
   if (telemetry.deceptionProbability >= 0.6) {
     return {
       threatColor: '#FF0055', // Crimson Alarm
-      statusLabel: 'AUTONOMIC SURGE DETECTED',
+      statusLabel: 'HEART RATE SPIKING',
     };
   }
   if (telemetry.deceptionProbability >= 0.4 || telemetry.bpmDelta >= 12) {
     return {
       threatColor: '#FFB800', // Amber Warning
-      statusLabel: 'ELEVATED STRESS',
+      statusLabel: 'GETTING NERVOUS',
     };
   }
   return {
     threatColor: '#00F0FF', // Neon Cyan Nominal
-    statusLabel: 'VITALS NOMINAL',
+    statusLabel: 'CALM & STEADY',
   };
 }
 
@@ -86,7 +86,7 @@ export const CameraHudOverlay: React.FC<CameraHudOverlayProps> = ({
       {/* Question Banner if present */}
       {questionText ? (
         <View style={styles.questionBanner}>
-          <Text style={styles.questionLabel}>HOT-SEAT INTERROGATION</Text>
+          <Text style={styles.questionLabel}>QUESTION</Text>
           <Text style={styles.questionContent}>"{questionText}"</Text>
         </View>
       ) : null}

@@ -24,7 +24,7 @@ describe('PulseWaveform & CameraHudOverlay logic', () => {
     });
 
     expect(calmStatus.threatColor).toBe('#00F0FF'); // Neon Cyan
-    expect(calmStatus.statusLabel).toBe('VITALS NOMINAL');
+    expect(calmStatus.statusLabel).toBe('CALM & STEADY');
 
     const spikeStatus = getHudTelemetryStatus({
       timestamp: Date.now(),
@@ -40,7 +40,7 @@ describe('PulseWaveform & CameraHudOverlay logic', () => {
     });
 
     expect(spikeStatus.threatColor).toBe('#FF0055'); // Crimson Warning
-    expect(spikeStatus.statusLabel).toBe('AUTONOMIC SURGE DETECTED');
+    expect(spikeStatus.statusLabel).toBe('HEART RATE SPIKING');
 
     const lostStatus = getHudTelemetryStatus({
       timestamp: Date.now(),
@@ -56,7 +56,7 @@ describe('PulseWaveform & CameraHudOverlay logic', () => {
     });
 
     expect(lostStatus.threatColor).toBe('#8E9AA8');
-    expect(lostStatus.statusLabel).toBe('UNSTABLE / FACE LOST');
+    expect(lostStatus.statusLabel).toBe('FACE NOT DETECTED');
   });
 
   it('renders flatline path when pulse is zero', () => {

@@ -39,7 +39,7 @@ export default function App() {
     confidencePercentage: 92,
     bpmDelta: 2,
     breathHoldDetected: false,
-    summary: 'Resting composure maintained.',
+    summary: 'Completely calm and relaxed.',
   });
 
   const handleNextQuestion = () => {

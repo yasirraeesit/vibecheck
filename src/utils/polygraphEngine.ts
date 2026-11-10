@@ -47,14 +47,14 @@ export function evaluateVerdict(
   const confidencePercentage = Math.min(99, Math.max(50, Math.round(rawConfidence)));
 
   let summary = isDeceptive
-    ? 'DECEPTION DETECTED: Significant autonomic nervous surge recorded.'
-    : 'COLD-BLOODED TRUTH: Physiological composure remained rock solid.';
+    ? 'DECEPTION DETECTED: A clear pulse spike and nervous breathing pause showed up on camera.'
+    : 'TOTAL TRUTH: Heart rate and breathing stayed completely calm.';
 
   if (isDeceptive && bpmDelta > 15) {
-    summary += ` Pulse surged by +${bpmDelta} BPM.`;
+    summary += ` Pulse jumped by +${bpmDelta} BPM.`;
   }
   if (isDeceptive && breathHoldDetected) {
-    summary += ' Respiratory arrest / breath-hold detected.';
+    summary += ' Breath held right as the question was answered.';
   }
 
   return {

@@ -1,44 +1,47 @@
-# 🚨 VibeCheck: The Contactless Party Polygraph Powered by SmartSpectra
-*Submission for the Presage SmartSpectra SDK Challenge on DEV Community*
+# VibeCheck: A Contactless Party Lie Detector (Built with SmartSpectra)
+
+*My submission for the Presage SmartSpectra SDK Challenge on DEV Community.*
 
 **Tags:** `#presagechallenge`, `#devchallenge`, `#reactnative`, `#showdev`
 
 ---
 
-## What I Built
+## The Idea
 
-Most developer applications utilizing biometric sensing skew toward serious clinical tools or solitary breathing guides. When I saw the **Presage SmartSpectra SDK Challenge**, I wanted to take a completely different path: **What if contactless biometric sensing could power an electrifying, laugh-out-loud party game?**
+When I saw the **Presage SmartSpectra SDK Challenge**, I noticed a pattern: almost everyone was building breathing circles, workspace calmers, or virtual pets. Those are useful, but I wanted to try something different. 
 
-Introducing **VibeCheck**—the contactless party polygraph that turns your smartphone into a retro-futuristic "human lie detector".
+What if you could use camera-based biometric tracking as a fun party game with your friends?
 
-Players put their friends in the hot seat, pointing their phone camera at the "suspect" to calibrate a 5-second baseline of their resting pulse and breathing rhythm. Then comes the interrogation: drawing from a deck of 50+ spicy, hilarious, and absurd party questions (or typing in your own). 
+That's how **VibeCheck** was born. It turns your phone into a retro sci-fi lie detector:
 
-As the suspect answers, the live cybernetic HUD tracks their autonomic nervous system:
-- **60 FPS Procedural Pleth Waveform:** Showing real-time cardiac cadence.
-- **Cardiac Surge Meter:** Highlighting pulse spikes ($\Delta\text{BPM}$) over baseline.
-- **Respiration Arrest Flag:** Catching subtle breath-holds or nervous hyperventilation.
-- **Micro-Expression Strain:** Measuring involuntary facial twitches.
-
-When the answer is locked in, suspenseful sirens ring out, the phone buzzes with haptic alarms, and VibeCheck stamps down a verdict: **DECEPTION DETECTED** or **COLD-BLOODED TRUTH**—complete with an exportable "Mugshot & Lie Certificate" card to share on social media.
-
----
-
-## Demo & Repository
-
-- **Public GitHub Repository:** [github.com/yasirraeesit/vibecheck](https://github.com/yasirraeesit/vibecheck)
-- **Demo Video (YouTube / Loom):** [Link to 60-second gameplay video demo]
-- **Downloadable APK:** Available under GitHub Releases for Android testing.
+1. **The Setup:** You point your phone camera at a friend sitting across from you.
+2. **The Calibration:** The app takes 5 seconds to lock onto their face and record their resting heart rate and breathing pace.
+3. **The Question:** You draw a funny or spicy question from the deck (or write your own on the spot).
+4. **The Interrogation:** As your friend talks, a live cybernetic HUD tracks their vitals on screen:
+   - **Real-Time Heart Wave:** A smooth, running pulse wave that speeds up as their heart rate climbs.
+   - **Pulse Spike Meter:** Shows how many beats per minute their heart jumped compared to resting baseline.
+   - **Breath-Hold Alert:** Flags if they suddenly freeze their breathing while trying to think of an excuse.
+5. **The Verdict:** After they finish answering, you hit **"Lock In Answer"**. The app sounds a countdown siren, vibrates with haptics, and drops the verdict: **CAUGHT IN A LIE!** or **CLEAN TRUTH!**, with a shareable result card you can save or send to the group chat.
 
 ---
 
-## How I Integrated the Presage SmartSpectra SDK
+## Links
 
-VibeCheck is built with **React Native** and **Expo SDK 52**, integrating Presage's official Android SDK (`com.presagetech:smartspectra:1.0.25`).
+- **GitHub Repository:** [github.com/yasirraeesit/vibecheck](https://github.com/yasirraeesit/vibecheck)
+- **Demo Video:** [Link to your 60-second video demo]
+- **Downloadable APK:** Linked in GitHub Releases for testing on any Android phone.
 
-### 1. Native Android Module Bridge
-Because Expo applications run in a managed environment, I engineered a custom Expo Config Plugin (`plugins/withSmartSpectra.js`) paired with a native Kotlin bridge module (`SmartSpectraModule.kt`). 
+---
 
-The native bridge handles the SmartSpectra lifecycle:
+## How It Works Under the Hood
+
+VibeCheck is built with **React Native (Expo SDK 52)** and connects to Presage's native Android SDK (`com.presagetech:smartspectra:1.0.25`).
+
+### 1. Camera & Native Android Bridge
+Presage's SDK analyzes video frames directly to pick up optical changes in skin blood flow (photoplethysmography). To use this inside React Native, I wrote a Kotlin module (`SmartSpectraModule.kt`) and an Expo config plugin (`plugins/withSmartSpectra.js`). 
+
+The native Android module initializes the Presage SDK and sends real-time pulse and breathing updates into React Native through event listeners:
+
 ```kotlin
 @ReactMethod
 fun initialize(apiKey: String, promise: Promise) {
@@ -48,35 +51,32 @@ fun initialize(apiKey: String, promise: Promise) {
     promise.resolve(true)
 }
 ```
-When optical photoplethysmography detects subtle skin micro-flushes and facial movement, it marshals the signals directly onto React Native's device event emitter (`RCTDeviceEventEmitter`) as structured vitals packets (`onVitalsUpdate`).
 
-### 2. Autonomic Deception Scoring Algorithm
-Inside `src/utils/polygraphEngine.ts`, VibeCheck evaluates three composite indicators of autonomic arousal:
-$$\text{Deception Score} = 0.45 \cdot \min\left(1.0, \frac{\Delta \text{BPM}}{25}\right) + 0.30 \cdot \mathbb{I}_{\text{breath\_hold}} + 0.25 \cdot \text{TensionScore}$$
-- If a suspect's pulse surges by +20 BPM and they freeze their breathing, the score spikes past the $0.60$ threshold, sounding retro sci-fi sirens and triggering haptic vibration patterns.
+### 2. The Stress & Deception Heuristic
+In `src/utils/polygraphEngine.ts`, the app calculates a weighted stress score from three physical reactions:
+- **Heart rate increase:** How high their pulse climbed compared to their 5-second resting baseline.
+- **Breathing hesitation:** Whether their breathing rate dropped below 10 breaths per minute right as they answered.
+- **Facial tension:** Micro-expression changes and blink rate shifts.
 
-### 3. Built-in Physiological Dev Simulator
-To ensure anyone (including hackathon evaluators without local native Android compilers) can test the game instantly, I built an organic physiological simulator right into the start screen. It accurately models sinus arrhythmia and autonomic stress surges in pure TypeScript.
+If their heart jumps by more than 15–20 BPM and they hold their breath, the deception score triggers the alarm and flashes the red warning HUD.
 
----
-
-## Camera Consent & Responsible Privacy
-
-Contactless physiological sensing requires clear, uncompromised consent:
-1. **Explicit Consent Gate:** The app cannot enter the interrogation or calibration state without the user explicitly reading and accepting the privacy terms.
-2. **100% On-Device Processing:** Optical signals are processed strictly in device RAM by the SmartSpectra engine. Zero video frames or biometric telemetry packets are uploaded to external cloud servers.
-3. **Transparent Framing:** The HUD prominently displays a red `[LIVE SCAN / SMARTSPECTRA]` indicator so all participants know when the camera is actively evaluating metrics.
-4. **Entertainment Purpose:** The app explicitly informs participants that it is an entertaining party game, not a medical or forensic diagnostic tool.
+### 3. Built-in Dev Simulator Mode
+I know judges and community reviewers don't always have a physical Android phone or another person in the room to test with. Right on the home screen, there's a **"Dev Simulator"** switch. When turned on, the app runs an internal heartbeat oscillator in pure TypeScript. You can press the **"Spike Vitals"** button to simulate what happens when someone gets nervous and test the whole game loop instantly.
 
 ---
 
-## What I Learned & What's Next
+## Privacy & Camera Consent
 
-Building **VibeCheck** completely changed how I think about camera-based biosensing. Removing the friction of wearables opens up new genres of social computing—turning subtle biological signals into interactive comedy and camaraderie.
+Biometric tracking should always be transparent and consensual:
 
-For next steps, I plan to:
-- Add a 2-phone local Bluetooth link so the interrogator can hold one phone while the second phone acts as a stationary interrogation tripod camera.
-- Expand the party deck with user-submitted community packs.
+- **100% On-Device:** Video frames are analyzed locally in phone memory by the SmartSpectra SDK. Nothing is saved to disk, and no video or biometric data is ever sent to any cloud server.
+- **No Sign-Up or Accounts:** The app opens right away. No email, no tracking, no permissions beyond the camera.
+- **Upfront Notice:** The app clearly states on the first screen that it is just a game for laughs with friends—not a real medical or legal test.
 
-Thank you to **Presage Technologies** and **DEV Community** for hosting such a creative and forward-looking challenge!
+---
 
+## What I Learned
+
+Working with contactless optical sensing was an eye-opener. Not having to put a smartwatch or finger clip on someone completely changes how natural an interaction feels. You can just point your phone, ask a question, and let their body language and heartbeat do the talking.
+
+Hope you enjoy trying it out! Let me know in the comments what questions you'd add to the deck.

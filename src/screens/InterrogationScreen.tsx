@@ -52,14 +52,14 @@ export const InterrogationScreen: React.FC<InterrogationScreenProps> = ({
               onNextQuestion();
             }}
           >
-            <Text style={styles.pillBtnText}>SKIP QUESTION</Text>
+            <Text style={styles.pillBtnText}>NEXT CARD</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[styles.pillBtn, styles.pillHighlight]}
             onPress={() => setShowCustomInput(!showCustomInput)}
           >
-            <Text style={styles.pillHighlightText}>+ CUSTOM</Text>
+            <Text style={styles.pillHighlightText}>+ WRITE YOUR OWN</Text>
           </TouchableOpacity>
 
           {/* Simulate stress button for demoing */}
@@ -67,7 +67,7 @@ export const InterrogationScreen: React.FC<InterrogationScreenProps> = ({
             style={[styles.pillBtn, styles.pillSpike]}
             onPress={() => onApplyStressStimulus(0.85)}
           >
-            <Text style={styles.pillSpikeText}>STRESS SPIKE</Text>
+            <Text style={styles.pillSpikeText}>SPIKE VITALS</Text>
           </TouchableOpacity>
         </View>
 
@@ -75,7 +75,7 @@ export const InterrogationScreen: React.FC<InterrogationScreenProps> = ({
           <View style={styles.customInputBox}>
             <TextInput
               style={styles.inputField}
-              placeholder="Type spicy question..."
+              placeholder="Type your own question..."
               placeholderTextColor="#8E9AA8"
               value={customText}
               onChangeText={setCustomText}
@@ -87,7 +87,7 @@ export const InterrogationScreen: React.FC<InterrogationScreenProps> = ({
         )}
 
         <TouchableOpacity style={styles.verdictBtn} onPress={onLockInVerdict}>
-          <Text style={styles.verdictBtnText}>LOCK IN ANSWER & ANALYZE</Text>
+          <Text style={styles.verdictBtnText}>LOCK IN ANSWER</Text>
         </TouchableOpacity>
       </View>
     </View>

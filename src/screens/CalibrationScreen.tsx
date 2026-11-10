@@ -46,13 +46,13 @@ export const CalibrationScreen: React.FC<CalibrationScreenProps> = ({
       <CameraHudOverlay telemetry={telemetry} targetLocked={targetLocked} />
 
       <View style={styles.floatingCenterCard}>
-        <Text style={styles.calibHeader}>CALIBRATING BASELINE</Text>
+        <Text style={styles.calibHeader}>STAY STILL</Text>
         <Text style={styles.countdownNumber}>{countdown}</Text>
         <Text style={styles.calibSub}>
-          Subject must face camera and breathe normally. Establishing autonomic baseline...
+          Keep your face in the box and breathe normally while we get your resting heartbeat.
         </Text>
         <Text style={styles.liveBpmText}>
-          SAMPLED: {telemetry.pulseBpm > 0 ? `${telemetry.pulseBpm} BPM` : 'ACQUIRING PULSE...'}
+          {telemetry.pulseBpm > 0 ? `CURRENT PULSE: ${telemetry.pulseBpm} BPM` : 'LOCKING ONTO FACE...'}
         </Text>
       </View>
     </View>
