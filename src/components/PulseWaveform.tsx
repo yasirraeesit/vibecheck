@@ -18,8 +18,12 @@ export function generateDicroticWavePath(
   height: number,
   phaseOffset: number
 ): string {
-  const points: [number, number][] = [];
   const midY = height * 0.65;
+  if (bpm <= 0) {
+    return `M 0 ${midY.toFixed(1)} L ${width.toFixed(1)} ${midY.toFixed(1)}`;
+  }
+
+  const points: [number, number][] = [];
   const amplitude = height * 0.45;
   
   // Wavelength inversely proportional to BPM
@@ -109,3 +113,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 });
+

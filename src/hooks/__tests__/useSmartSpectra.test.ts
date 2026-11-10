@@ -33,3 +33,4 @@ describe('OrganicSimulatorEngine', () => {
     expect(recoveredSample.pulseBpm).toBeLessThan(95);
   });
 });
+

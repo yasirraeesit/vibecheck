@@ -41,5 +41,27 @@ describe('PulseWaveform & CameraHudOverlay logic', () => {
 
     expect(spikeStatus.threatColor).toBe('#FF0055'); // Crimson Warning
     expect(spikeStatus.statusLabel).toBe('AUTONOMIC SURGE DETECTED');
+
+    const lostStatus = getHudTelemetryStatus({
+      timestamp: Date.now(),
+      pulseBpm: 0,
+      baselineBpm: 72,
+      bpmDelta: 0,
+      breathingRate: 0,
+      breathHoldDetected: false,
+      hrvVariance: 0,
+      facialTensionScore: 0,
+      deceptionProbability: 0,
+      status: 'lost',
+    });
+
+    expect(lostStatus.threatColor).toBe('#8E9AA8');
+    expect(lostStatus.statusLabel).toBe('UNSTABLE / FACE LOST');
+  });
+
+  it('renders flatline path when pulse is zero', () => {
+    const flatPath = generateDicroticWavePath(0, 300, 100, 0);
+    expect(flatPath).toBe('M 0 65.0 L 300.0 65.0');
   });
 });
+

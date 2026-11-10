@@ -76,3 +76,4 @@ export function useSoundEffects(): SoundController {
 
   return createSoundController(soundsRef.current);
 }
+

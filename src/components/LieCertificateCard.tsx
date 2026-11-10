@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Share } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
 
@@ -52,10 +52,24 @@ export const LieCertificateCard: React.FC<LieCertificateCardProps> = ({ input, o
             dialogTitle: 'Share your VibeCheck polygraph result',
           });
           onShared?.();
+          return;
         }
       }
+      // Fallback text sharing if image sharing is unavailable
+      await Share.share({
+        message: `🚨 VIBECHECK POLYGRAPH REPORT 🚨\nVerdict: ${data.verdictTitle} (${data.confidenceLabel})\nQuestion: "${input.questionText}"\nVariation: ${data.deltaLabel}`,
+      });
+      onShared?.();
     } catch {
-      // Safe fallback on preview
+      // Safe fallback text share
+      try {
+        await Share.share({
+          message: `🚨 VIBECHECK POLYGRAPH REPORT 🚨\nVerdict: ${data.verdictTitle} (${data.confidenceLabel})\nQuestion: "${input.questionText}"\nVariation: ${data.deltaLabel}`,
+        });
+        onShared?.();
+      } catch {
+        // Safe catch
+      }
     }
   };
 
@@ -229,3 +243,4 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 });
+

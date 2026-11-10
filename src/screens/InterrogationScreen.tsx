@@ -32,11 +32,13 @@ export const InterrogationScreen: React.FC<InterrogationScreenProps> = ({
     }
   };
 
+  const targetLocked = telemetry.status === 'locked' && telemetry.pulseBpm > 0;
+
   return (
     <View style={styles.container}>
       <CameraHudOverlay
         telemetry={telemetry}
-        targetLocked={true}
+        targetLocked={targetLocked}
         questionText={activeQuestion.text}
       />
 
@@ -185,3 +187,4 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
   },
 });
+

@@ -27,6 +27,10 @@ export const StyleSheet = {
   },
 };
 
+export const Share = {
+  share: jest.fn().mockResolvedValue({ action: 'sharedAction' }),
+};
+
 export const View = (props: any) => React.createElement('View', props, props.children);
 export const Text = (props: any) => React.createElement('Text', props, props.children);
 export const TouchableOpacity = (props: any) => React.createElement('TouchableOpacity', props, props.children);

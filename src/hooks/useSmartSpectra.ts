@@ -107,7 +107,16 @@ export function useSmartSpectra(options: UseSmartSpectraOptions = {}) {
 
       return () => clearInterval(interval);
     } else {
-      // Native Android SmartSpectraModule event subscription
+      // Native Android SmartSpectraModule lifecycle and event subscription
+      if (NativeModules?.SmartSpectraModule) {
+        try {
+          NativeModules.SmartSpectraModule.initialize('VIBECHECK_DEMO_KEY');
+          NativeModules.SmartSpectraModule.startMeasurement();
+        } catch {
+          // Safe catch
+        }
+      }
+
       const subscription = DeviceEventEmitter.addListener(
         'onVitalsUpdate',
         (event: VitalsUpdateEvent) => {
@@ -118,6 +127,13 @@ export function useSmartSpectra(options: UseSmartSpectraOptions = {}) {
 
       return () => {
         subscription.remove();
+        if (NativeModules?.SmartSpectraModule?.stopMeasurement) {
+          try {
+            NativeModules.SmartSpectraModule.stopMeasurement();
+          } catch {
+            // Safe catch
+          }
+        }
       };
     }
   }, [useSimulator]);

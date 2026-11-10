@@ -62,3 +62,4 @@ export class QuestionDeck {
     this.questions = array;
   }
 }
+

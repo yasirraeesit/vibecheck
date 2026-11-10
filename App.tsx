@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Modal } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { CameraView } from 'expo-camera';
 import { GameState, PartyQuestion, VerdictResult } from './src/types/telemetry';
 import { useSmartSpectra } from './src/hooks/useSmartSpectra';
 import { useHaptics } from './src/hooks/useHaptics';
@@ -70,6 +71,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
+
+      {/* When live camera mode is active, render CameraView beneath HUD */}
+      {!simulatorMode && (gameState === 'calibration' || gameState === 'interrogation') && (
+        <CameraView style={StyleSheet.absoluteFill} facing="front" />
+      )}
 
       {gameState === 'consent' && (
         <ConsentScreen
@@ -144,4 +150,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-

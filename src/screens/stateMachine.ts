@@ -20,3 +20,4 @@ export function nextGameState(current: GameState): GameState {
       return 'consent';
   }
 }
+

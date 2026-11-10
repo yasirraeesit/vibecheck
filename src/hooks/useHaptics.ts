@@ -47,3 +47,4 @@ export function createHapticController(hapticsApi = Haptics): HapticController {
 export function useHaptics(): HapticController {
   return createHapticController();
 }
+

@@ -22,3 +22,4 @@ describe('Game State Transitions', () => {
     expect(state).toBe('calibration');
   });
 });
+

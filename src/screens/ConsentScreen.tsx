@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Linking } from 'react-native';
+import { useCameraPermissions } from 'expo-camera';
 
 interface ConsentScreenProps {
   onAccept: () => void;
@@ -12,6 +13,26 @@ export const ConsentScreen: React.FC<ConsentScreenProps> = ({
   simulatorMode,
   onToggleSimulator,
 }) => {
+  const [permission, requestPermission] = useCameraPermissions();
+
+  const handleProceed = async () => {
+    if (simulatorMode) {
+      onAccept();
+      return;
+    }
+
+    if (!permission?.granted) {
+      const res = await requestPermission();
+      if (res.granted) {
+        onAccept();
+      }
+    } else {
+      onAccept();
+    }
+  };
+
+  const isPermissionDenied = !simulatorMode && permission && !permission.granted && !permission.canAskAgain;
+
   return (
     <View style={styles.container}>
       <View style={styles.badgeRow}>
@@ -57,9 +78,20 @@ export const ConsentScreen: React.FC<ConsentScreenProps> = ({
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.actionButton} onPress={onAccept}>
-        <Text style={styles.actionButtonText}>ACCEPT & ENTER INTERROGATION</Text>
-      </TouchableOpacity>
+      {isPermissionDenied ? (
+        <View style={styles.deniedBox}>
+          <Text style={styles.deniedText}>
+            Camera permission is required for live contactless sensing.
+          </Text>
+          <TouchableOpacity style={styles.settingsBtn} onPress={() => Linking.openSettings()}>
+            <Text style={styles.settingsBtnText}>OPEN DEVICE SETTINGS</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <TouchableOpacity style={styles.actionButton} onPress={handleProceed}>
+          <Text style={styles.actionButtonText}>ACCEPT & ENTER INTERROGATION</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -170,6 +202,33 @@ const styles = StyleSheet.create({
     color: '#0B0F19',
     fontSize: 10,
     fontWeight: '800',
+  },
+  deniedBox: {
+    backgroundColor: 'rgba(255, 0, 85, 0.1)',
+    borderColor: '#FF0055',
+    borderWidth: 1,
+    borderRadius: 14,
+    padding: 16,
+    alignItems: 'center',
+  },
+  deniedText: {
+    color: '#FF0055',
+    fontSize: 12,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 12,
+  },
+  settingsBtn: {
+    backgroundColor: '#FF0055',
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+  },
+  settingsBtnText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '900',
+    letterSpacing: 1,
   },
   actionButton: {
     backgroundColor: '#00F0FF',

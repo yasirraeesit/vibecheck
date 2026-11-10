@@ -32,3 +32,4 @@ describe('QuestionDeck', () => {
     expect(categories).toContain('absurd');
   });
 });
+

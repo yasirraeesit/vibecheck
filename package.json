@@ -43,7 +43,8 @@
       "^react-native-svg$": "<rootDir>/__mocks__/react-native-svg.ts",
       "^react-native-view-shot$": "<rootDir>/__mocks__/react-native-view-shot.ts",
       "^expo-sharing$": "<rootDir>/__mocks__/expo-sharing.ts",
-      "^expo-status-bar$": "<rootDir>/__mocks__/expo-status-bar.ts"
+      "^expo-status-bar$": "<rootDir>/__mocks__/expo-status-bar.ts",
+      "^expo-camera$": "<rootDir>/__mocks__/expo-camera.ts"
     },
     "moduleFileExtensions": [
       "ts",

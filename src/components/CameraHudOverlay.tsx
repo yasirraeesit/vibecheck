@@ -11,6 +11,12 @@ interface CameraHudOverlayProps {
 }
 
 export function getHudTelemetryStatus(telemetry: BiometricTelemetry) {
+  if (telemetry.status === 'lost' || telemetry.pulseBpm === 0) {
+    return {
+      threatColor: '#8E9AA8',
+      statusLabel: 'UNSTABLE / FACE LOST',
+    };
+  }
   if (telemetry.deceptionProbability >= 0.6) {
     return {
       threatColor: '#FF0055', // Crimson Alarm
@@ -73,7 +79,7 @@ export const CameraHudOverlay: React.FC<CameraHudOverlayProps> = ({
           <Line x1="110" y1="110" x2="110" y2="130" stroke={threatColor} strokeWidth="1.5" />
         </Svg>
         <Text style={[styles.reticleTag, { color: threatColor }]}>
-          {targetLocked ? 'TARGET LOCK // SUSPECT' : 'ACQUIRING SUBJECT...'}
+          {targetLocked ? 'TARGET LOCK // SUSPECT' : 'UNSTABLE // FACE LOST'}
         </Text>
       </View>
 
@@ -238,3 +244,4 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
+

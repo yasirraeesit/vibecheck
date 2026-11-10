@@ -28,3 +28,4 @@ describe('formatVerdictCertificateData', () => {
     expect(data.badgeColor).toBe('#00F0FF');
   });
 });
+

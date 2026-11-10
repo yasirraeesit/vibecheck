@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { BiometricTelemetry } from '../types/telemetry';
 import { CameraHudOverlay } from '../components/CameraHudOverlay';
 
@@ -16,9 +16,15 @@ export const CalibrationScreen: React.FC<CalibrationScreenProps> = ({
 }) => {
   const [countdown, setCountdown] = useState(5);
 
+  // Continuously feed samples as pulse updates during calibration window
   useEffect(() => {
-    onFeedSample(telemetry.pulseBpm);
+    if (telemetry.pulseBpm > 0) {
+      onFeedSample(telemetry.pulseBpm);
+    }
+  }, [telemetry.pulseBpm, onFeedSample]);
 
+  // 5-second countdown timer
+  useEffect(() => {
     const timer = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
@@ -31,11 +37,13 @@ export const CalibrationScreen: React.FC<CalibrationScreenProps> = ({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [onCalibrationComplete]);
+
+  const targetLocked = telemetry.status === 'locked' && telemetry.pulseBpm > 0;
 
   return (
     <View style={styles.container}>
-      <CameraHudOverlay telemetry={telemetry} targetLocked={true} />
+      <CameraHudOverlay telemetry={telemetry} targetLocked={targetLocked} />
 
       <View style={styles.floatingCenterCard}>
         <Text style={styles.calibHeader}>CALIBRATING BASELINE</Text>
@@ -44,7 +52,7 @@ export const CalibrationScreen: React.FC<CalibrationScreenProps> = ({
           Subject must face camera and breathe normally. Establishing autonomic baseline...
         </Text>
         <Text style={styles.liveBpmText}>
-          SAMPLED: {telemetry.pulseBpm} BPM
+          SAMPLED: {telemetry.pulseBpm > 0 ? `${telemetry.pulseBpm} BPM` : 'ACQUIRING PULSE...'}
         </Text>
       </View>
     </View>

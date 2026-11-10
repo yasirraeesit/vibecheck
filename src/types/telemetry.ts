@@ -51,3 +51,4 @@ export interface VerdictResult {
   breathHoldDetected: boolean;
   summary: string;
 }
+

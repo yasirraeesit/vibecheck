@@ -38,3 +38,4 @@ describe('Haptic & Sound Controllers', () => {
     expect(mockSound.replayAsync).toHaveBeenCalled();
   });
 });
+
