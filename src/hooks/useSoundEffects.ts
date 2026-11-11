@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { Audio } from 'expo-av';
 
 export interface SoundController {
   playHeartbeatThump: () => Promise<void>;
@@ -11,7 +10,9 @@ export function createSoundController(soundsMap?: Record<string, any>): SoundCon
   return {
     async playHeartbeatThump() {
       try {
-        if (soundsMap?.heartbeat?.replayAsync) {
+        if (soundsMap?.heartbeat?.play) {
+          soundsMap.heartbeat.play();
+        } else if (soundsMap?.heartbeat?.replayAsync) {
           await soundsMap.heartbeat.replayAsync();
         }
       } catch {
@@ -21,7 +22,9 @@ export function createSoundController(soundsMap?: Record<string, any>): SoundCon
 
     async playSiren() {
       try {
-        if (soundsMap?.siren?.replayAsync) {
+        if (soundsMap?.siren?.play) {
+          soundsMap.siren.play();
+        } else if (soundsMap?.siren?.replayAsync) {
           await soundsMap.siren.replayAsync();
         }
       } catch {
@@ -31,7 +34,9 @@ export function createSoundController(soundsMap?: Record<string, any>): SoundCon
 
     async playChime() {
       try {
-        if (soundsMap?.chime?.replayAsync) {
+        if (soundsMap?.chime?.play) {
+          soundsMap.chime.play();
+        } else if (soundsMap?.chime?.replayAsync) {
           await soundsMap.chime.replayAsync();
         }
       } catch {
@@ -42,7 +47,7 @@ export function createSoundController(soundsMap?: Record<string, any>): SoundCon
 }
 
 export function useSoundEffects(): SoundController {
-  const soundsRef = useRef<Record<string, Audio.Sound | null>>({
+  const soundsRef = useRef<Record<string, any>>({
     heartbeat: null,
     siren: null,
     chime: null,
@@ -51,29 +56,25 @@ export function useSoundEffects(): SoundController {
   useEffect(() => {
     let isMounted = true;
 
-    async function loadSounds() {
+    async function initAudio() {
       try {
-        await Audio.setAudioModeAsync({
-          playsInSilentModeIOS: true,
-          shouldDuckAndroid: true,
-        });
-
-        // Synthetic or asset sound hooks can be loaded here
+        // Dynamically load expo-audio if available in the current runtime
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const expoAudio = require('expo-audio');
+        if (expoAudio?.setIsAudioActiveAsync) {
+          await expoAudio.setIsAudioActiveAsync(true);
+        }
       } catch {
-        // Audio mode setup safe catch
+        // Safe fallback - haptics provide primary physical feedback
       }
     }
 
-    loadSounds();
+    initAudio();
 
     return () => {
       isMounted = false;
-      Object.values(soundsRef.current).forEach((sound) => {
-        sound?.unloadAsync().catch(() => {});
-      });
     };
   }, []);
 
   return createSoundController(soundsRef.current);
 }
-
